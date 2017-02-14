@@ -30,6 +30,6 @@ Usage:
 How to get the Spotify ID:
 
 
-    ![Alt text](https://github.com/Flo9818/SpotiLoader/blob/master/Pictures/track.png?raw=true "Getting Track ID")    
-    ![Alt text](https://github.com/Flo9818/SpotiLoader/blob/master/Pictures/album.png?raw=true "Getting Album ID")
-    ![Alt text](https://github.com/Flo9818/SpotiLoader/blob/master/Pictures/playlist.png?raw=true "Download playlists")
+   ![Alt text](https://github.com/Flo9818/SpotiLoader/blob/master/Pictures/track.png?raw=true "Getting Track ID")    
+   ![Alt text](https://github.com/Flo9818/SpotiLoader/blob/master/Pictures/album.png?raw=true "Getting Album ID")
+   ![Alt text](https://github.com/Flo9818/SpotiLoader/blob/master/Pictures/playlist.png?raw=true "Download playlists")
