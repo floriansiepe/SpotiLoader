@@ -27,6 +27,11 @@ Usage:
     SpotiLoader.py -i, --interactive             Starts in interactiveMode
     SpotiLoader.py -h, --help                    Print this help
 
+For example:
+    SpotiLoader.py -l exampleList.txt
+    SpotiLoader.py -t spotify:track:2RIWb6YwSqdQTbWSNFBKYz
+    SpotiLoader.py -a spotify:album:6uGYCZLXw3wPFOSYcqLz9F
+
 How to get the Spotify ID:
     
    Tracks:
