@@ -29,5 +29,7 @@ Usage:
 
 How to get the Spotify ID:
 
-  Tracks:
-    
+
+    ![Alt text](/Pictures/track.png?raw=true "Getting Track ID")    
+    ![Alt text](/Pictures/album.png?raw=true "Getting Album ID")
+    ![Alt text](/Pictures/playlist.png?raw=true "Download playlists")
