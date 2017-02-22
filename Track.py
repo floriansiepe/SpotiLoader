@@ -1,5 +1,6 @@
 import spotipy
 
+
 class Track:
     def __init__(self, pSpotifyUri):
         self.uri = pSpotifyUri

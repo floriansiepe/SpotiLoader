@@ -1,10 +1,12 @@
 from spotipy import *
+
 from Album import *
 from Artist import *
 from Track import *
 
+
 class MetaTag:
-    def __init__(self, pString, byID = False):
+    def __init__(self, pString, byID=False):
         self.artist = None
         self.album = None
         self.track = None
@@ -35,4 +37,3 @@ class MetaTag:
 
     def getTrack(self):
         return self.track
-

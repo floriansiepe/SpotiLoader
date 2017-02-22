@@ -1,15 +1,20 @@
+import getopt
 import os
 import sys
-import getopt
-from YTDownloader import YTDownloader
-from MetaTag import MetaTag
+
 import spotipy
+
+from M3UWriter import M3UWriter
+from MetaTag import MetaTag
+from YTDownloader import YTDownloader
+
 
 class SpotiLoader:
     def __init__(self, list=None, track=None, album=None, interactive=False):
         os.chdir(sys.path[0])
         if not os.path.exists("Music"):
             os.makedirs("Music")
+        self.playlistWriter = M3UWriter()
         if list != None:
             self.startList(list)
         elif track != None:
@@ -25,7 +30,13 @@ class SpotiLoader:
         except spotipy.client.SpotifyException:
             print ('Unknow track ID. Exiting')
             sys.exit()
-        YTDownloader(MetaTag(pTrack, byID=True))
+        metatag = MetaTag(pTrack, byID=True)
+        if os.path.isfile("Music/" + metatag.getArtist().getArtistName() + ' - ' + metatag.getAlbum().getAlbumName() + ' - ' + metatag.getTrack().getTrackName() +".mp3"):
+            print ("Found: " + metatag.getArtist().getArtistName() + ' - ' + metatag.getAlbum().getAlbumName() + ' - ' + metatag.getTrack().getTrackName() + "\n Skiping")
+        else:
+            downloader = YTDownloader(metatag)
+            path = downloader.download()
+            self.playlistWriter.addItem(path)
 
     def startAlbum(self, pAlbum):
         try:
@@ -39,6 +50,7 @@ class SpotiLoader:
             print ("")
             print (str(i + 1) + " of " + str(len(re)))
             self.startTrack(re[i]['uri'])
+        self.playlistWriter.writeM3U()
 
     def startInteractive(self):
         print ('Enter exit to quit the program.')
@@ -46,15 +58,19 @@ class SpotiLoader:
             a = raw_input('Enter a search term: ')
             if a == 'exit':
                 break
-            YTDownloader(MetaTag(a, byID=False))
+            downloader = YTDownloader(MetaTag(a, byID=False))
+            path = downloader.download()
+            self.playlistWriter.addItem(path)
+        self.playlistWriter.writeM3U()
 
     def startList(self, pList):
         data = self.getDownloadList(pList)
         print("Loaded " + str(len(data)) + " items from list")
         for i in range(len(data)):
             print ("")
-            print (str(i+1)+ " of " + str(len(data)))
+            print (str(i + 1) + " of " + str(len(data)))
             self.startTrack(data[i])
+        self.playlistWriter.writeM3U()
 
     def getDownloadList(self, pList):
         try:
@@ -100,7 +116,7 @@ if __name__ == "__main__":
     for o, a in myopts:
         if o in ('-l', '--list'):
             sp = SpotiLoader(list=a)
-        elif o in('-t', '--track'):
+        elif o in ('-t', '--track'):
             sp = SpotiLoader(track=a)
         elif o in ('-a', '--album'):
             sp = SpotiLoader(album=a)
